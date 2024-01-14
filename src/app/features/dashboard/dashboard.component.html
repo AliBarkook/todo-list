@@ -1,0 +1,18 @@
+<mat-drawer-container class="example-container">
+    <mat-drawer  opened mode="side">
+        <mat-list class="pt-4">
+
+            @for (tab of tabs; track $index) {
+                <mat-list-item class="d-flex p-0" role="listitem">
+                    <button mat-stroked-button class="col-12 d-flex justify-content-start align-items-center">
+                        <mat-icon [fontIcon]="tab.icon"></mat-icon>
+                        {{tab.title}}
+                    </button>
+                </mat-list-item>
+            }
+          </mat-list>
+    </mat-drawer>
+    <mat-drawer-content>
+        <router-outlet></router-outlet>
+    </mat-drawer-content>
+</mat-drawer-container>

@@ -1,0 +1,39 @@
+<form [formGroup]="taskForm" class="p-4 d-flex justify-content-between flex-wrap" (submit)="submit()">
+
+    <header class="col-12">
+        <h2>{{dialogData?.task? 'edit task:': 'add new task:'}}</h2>
+    </header>
+
+    <mat-form-field class="col-5">
+      <mat-label>Enter task name</mat-label>
+      <input matInput placeholder="" formControlName="title" required>
+      @if (taskForm.controls['title'].hasError('required')) {
+        <mat-error>this field is required</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field class="col-5">
+      <mat-label>Enter task date</mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="date" required>
+      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+      @if (taskForm.controls['date'].hasError('required')) {
+        <mat-error>this field is required</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field class="col-12 mt-3">
+      <mat-label>Enter description</mat-label>
+      <textarea matInput cols="30" rows="5" formControlName="description" required></textarea>
+      @if (taskForm.controls['description'].hasError('required')) {
+        <mat-error>this field is required</mat-error>
+      }
+    </mat-form-field>
+
+
+    <footer class="col-12 d-flex justify-content-end">
+        <button color="primary" [disabled]="taskForm.invalid" type="submit" mat-raised-button>submit</button>
+    </footer>
+
+</form>
+  

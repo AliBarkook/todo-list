@@ -17,6 +17,10 @@
         <button mat-button color="primary" (click)="doneEmitter.emit()">DONE</button>
       }
       <button mat-button color="accent" (click)="deleteEmitter.emit()">DELETE</button>
+
+      @if (haveMove) {
+        <mat-icon matTooltip="move to main list" style="cursor: pointer;" (click)="moveEmitter.emit()">reply</mat-icon>
+      }
     </mat-card-actions>
 </mat-card>
   

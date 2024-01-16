@@ -14,6 +14,8 @@ import { TaskService } from '../../../../shared/services/task.service';
 import { ActivatedRoute } from '@angular/router';
 import { UpdateListDialogComponent } from '../../../../shared/components/update-list-dialog/update-list-dialog.component';
 import { CommonModule } from '@angular/common';
+import { switchMap } from 'rxjs';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-list-detail',
@@ -34,6 +36,7 @@ export class ListDetailComponent {
     private taskService: TaskService,
     private dialog: MatDialog,
     private activatedRoute: ActivatedRoute,
+    private _snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -129,6 +132,20 @@ export class ListDetailComponent {
       if (list) {
         this.listDetail.date = list.date;
         this.listDetail.title = list.title;
+      }
+    })
+  }
+
+  moveToMainList(task: IGetTask, index: number) {
+    this.listService.getMainList().pipe(
+      switchMap(res => {
+        task.list = res._id;
+        return this.taskService.updateTask(task._id, task);
+      })
+    ).subscribe(res => {
+      this._snackBar.open('task moved to main list', 'ok')
+      if (task.list != this.listDetail._id) {
+        this.listTasks.splice(index, 1);
       }
     })
   }

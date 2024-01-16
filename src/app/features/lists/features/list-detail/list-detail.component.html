@@ -16,7 +16,7 @@
     <main class="col-12 d-flex flex-wrap mt-4">
         @for (task of listTasks; track $index) {
             <article class="col-12 col-sm-4 p-3">
-                <task-card [task]="task" (deleteEmitter)="deleteTask(task._id, $index)" (doneEmitter)="doneTask(task)" (editEmitter)="editTask(task)"></task-card>
+                <task-card [task]="task" (moveEmitter)="moveToMainList(task, $index)" [haveMove]="true" (deleteEmitter)="deleteTask(task._id, $index)" (doneEmitter)="doneTask(task)" (editEmitter)="editTask(task)"></task-card>
             </article>
         }
     </main>

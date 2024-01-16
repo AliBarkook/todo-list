@@ -11,10 +11,18 @@ export const DashboardRoute: Routes = [
                 redirectTo: 'daily-task',
                 pathMatch: 'full'
             },
-            // {
-            //     path: 'daily-task',
-            //     loadChildren: () => import('../../order-container/routes/order.routes').then(r => r.ORDER_ROUTES)
-            // },
+            {
+                path: 'daily-tasks',
+                loadChildren: () => import('../daily-tasks/daily-tasks.routes').then(r => r.DailyTasksRoute)
+            },
+            {
+                path: 'done-tasks',
+                loadChildren: () => import('../done-tasks/done-tasks.routes').then(r => r.DoneTasksRoute)
+            },
+            {
+                path: 'lists',
+                loadChildren: () => import('../lists/lists.routes').then(r => r.ListsRoute)
+            },
         ]
     },
 

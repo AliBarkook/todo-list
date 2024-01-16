@@ -1,0 +1,32 @@
+<section class="col-12 d-flex flex-wrap">
+
+    <header class="col-12 d-flex flex-wrap justify-content-between align-items-center">
+        <h1 class="mb-0">lists: </h1>
+
+        <button mat-fab color="primary" matTooltip="add new list" (click)="addNewList()"><mat-icon>add</mat-icon></button>
+    </header>
+
+
+    <main class="col-12 d-flex flex-wrap mt-4">
+        <table mat-table [dataSource]="lists" class="mat-elevation-z8">
+
+          
+            <ng-container matColumnDef="title">
+              <th mat-header-cell *matHeaderCellDef> title </th>
+              <td mat-cell *matCellDef="let element"> {{element.title}} </td>
+            </ng-container>
+          
+            <ng-container matColumnDef="date">
+              <th mat-header-cell *matHeaderCellDef> date </th>
+              <td mat-cell *matCellDef="let element"> {{element.date | date}} </td>
+            </ng-container>
+      
+          
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+          
+          
+    </main>
+
+</section>

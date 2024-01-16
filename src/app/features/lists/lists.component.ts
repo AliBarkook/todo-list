@@ -10,11 +10,12 @@ import { UpdateListDialogComponent } from '../../shared/components/update-list-d
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-lists',
   standalone: true,
-  imports: [MatTableModule, MatButtonModule, MatIconModule, CommonModule, MatTooltipModule, MatDialogModule, MatDatepickerModule, MatNativeDateModule],
+  imports: [MatTableModule, MatButtonModule, MatIconModule, CommonModule, MatTooltipModule, MatDialogModule, MatDatepickerModule, MatNativeDateModule, RouterLink],
   templateUrl: './lists.component.html',
   styleUrl: './lists.component.scss'
 })
@@ -35,7 +36,6 @@ export class ListsComponent {
 
   getAllLists() {
     this.listService.getAllLists().subscribe(res => {
-      console.log(res);
       this.lists = res;
     })
   }

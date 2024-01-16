@@ -8,7 +8,7 @@ export const DashboardRoute: Routes = [
         children: [
             {
                 path: '',
-                redirectTo: 'daily-task',
+                redirectTo: 'daily-tasks',
                 pathMatch: 'full'
             },
             {

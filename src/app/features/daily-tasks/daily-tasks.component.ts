@@ -39,14 +39,12 @@ export class DailyTasksComponent {
     this.listService.getMainList().subscribe(res => {
       this.mainList = res;
       this.getDailyTasks(this.mainList._id);
-      console.log(res);
     })
   }
 
 
   getDailyTasks(listId: string) {
     this.taskService.getTasksByListId(listId).subscribe(res => {
-      console.log(res);
       this.dilyTasks = res;
     })
   }

@@ -1,0 +1,31 @@
+<form [formGroup]="listForm" class="p-4 d-flex justify-content-between flex-wrap" (submit)="submit()">
+
+    <header class="col-12">
+        <!-- <h2>{{dialogData?.task? 'edit task:': 'add new task:'}}</h2> -->
+    </header>
+
+    <mat-form-field class="col-5">
+      <mat-label>Enter list name</mat-label>
+      <input matInput placeholder="" formControlName="title" required>
+      @if (listForm.controls['title'].hasError('required')) {
+        <mat-error>this field is required</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field class="col-5">
+      <mat-label>Enter list date</mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="date" required>
+      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+      @if (listForm.controls['date'].hasError('required')) {
+        <mat-error>this field is required</mat-error>
+      }
+    </mat-form-field>
+
+
+    <footer class="col-12 d-flex justify-content-end">
+        <button color="primary" [disabled]="listForm.invalid" type="submit" mat-raised-button>submit</button>
+    </footer>
+
+</form>
+  

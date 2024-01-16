@@ -32,7 +32,6 @@ export class DoneTasksComponent {
 
   getDoneTasks() {
     this.taskService.getDoneTasks().subscribe(res => {
-      console.log(res);
       this.doneTasks = res;
     })
   }

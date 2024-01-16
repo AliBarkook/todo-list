@@ -8,6 +8,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { IGetList } from '../../interfaces/list.interface';
 
 @Component({
   selector: 'app-update-list-dialog',
@@ -21,7 +22,7 @@ export class UpdateListDialogComponent {
   listForm!: FormGroup;
   
   constructor(
-    @Inject(MAT_DIALOG_DATA)  public dialogData: {},
+    @Inject(MAT_DIALOG_DATA)  public dialogData: {list: IGetList},
     public dialogRef: MatDialogRef<UpdateListDialogComponent>,
     private formBuilder: FormBuilder,
     private listService: ListService,
@@ -36,17 +37,25 @@ export class UpdateListDialogComponent {
 
   initForm() {
     this.listForm = this.formBuilder.group({
-      title: ['', Validators.required],
-      date: ['', Validators.required],
-      isMain: [false, Validators.required],
+      title: [this.dialogData['list']?.title || '', Validators.required],
+      date: [this.dialogData['list']?.date || '', Validators.required],
+      isMain: [this.dialogData['list']?.isMain || 'false', Validators.required],
     })
   }
 
 
   submit() {
-    this.listService.createList(this.listForm.value).subscribe(res => {
-      this._snackBar.open('new list is added', 'ok');
-      this.dialogRef.close(res);
-    })
+    if (this.dialogData?.list) {
+      this.listService.updateList(this.dialogData.list._id, this.listForm.value).subscribe(res => {
+        this._snackBar.open('the list is updated', 'ok');
+        this.dialogRef.close(this.listForm.value);
+      })
+    }
+    else {
+      this.listService.createList(this.listForm.value).subscribe(res => {
+        this._snackBar.open('new list is added', 'ok');
+        this.dialogRef.close(res);
+      })
+    }
   }
 }

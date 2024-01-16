@@ -1,0 +1,24 @@
+<section class="col-12 d-flex flex-wrap">
+
+    <header class="col-12 d-flex flex-wrap justify-content-between align-items-center">
+
+        <div class="d-flex align-items-center">
+            <mat-icon class="me-2" style="cursor: pointer;" (click)="editList()">edit</mat-icon>
+            <h1 class="mb-0 me-1">{{listDetail?.title}} </h1>
+            <p class="mb-0">({{listDetail?.date | date}}): </p>
+            
+        </div>
+
+        <button mat-fab color="primary" matTooltip="add new task" (click)="addNewTask()"><mat-icon>add</mat-icon></button>
+    </header>
+
+
+    <main class="col-12 d-flex flex-wrap mt-4">
+        @for (task of listTasks; track $index) {
+            <article class="col-12 col-sm-4 p-3">
+                <task-card [task]="task" (deleteEmitter)="deleteTask(task._id, $index)" (doneEmitter)="doneTask(task)" (editEmitter)="editTask(task)"></task-card>
+            </article>
+        }
+    </main>
+
+</section>

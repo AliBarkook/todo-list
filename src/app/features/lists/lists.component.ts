@@ -11,6 +11,7 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { RouterLink } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-lists',
@@ -21,13 +22,14 @@ import { RouterLink } from '@angular/router';
 })
 export class ListsComponent {
 
-  displayedColumns: string[] = ['title', 'date'];
+  displayedColumns: string[] = ['title', 'date', 'action'];
   lists: IGetList[] = [];
 
 
   constructor(
     private listService: ListService,
     private dialog: MatDialog,
+    private _snackBar: MatSnackBar
   ) {}
 
   ngOnInit() {
@@ -54,6 +56,16 @@ export class ListsComponent {
         this.lists.push(list);
         this.lists = [...this.lists];
       }
+    })
+
+  }
+  
+  removeList(listId: string) {
+    this.listService.deleteList(listId).subscribe(res => {
+      const i = this.lists.findIndex(list => list._id == listId);
+      this.lists.splice(i, 1);
+      this.lists = [...this.lists];
+      this._snackBar.open('list removed', 'ok')
     })
   }
 }

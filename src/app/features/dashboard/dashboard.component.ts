@@ -3,14 +3,14 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { IDashboardTab } from '../../shared/interfaces/dashboard-tab.interface';
 import { MatListModule } from '@angular/material/list';
 import { MatButtonModule } from '@angular/material/button';
-import { RouterOutlet } from '@angular/router';
+import { RouterModule, RouterOutlet } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [MatSidenavModule, MatListModule, MatButtonModule, RouterOutlet, MatIconModule],
+  imports: [MatSidenavModule, MatListModule, MatButtonModule, RouterOutlet, MatIconModule, RouterModule],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss'
 })

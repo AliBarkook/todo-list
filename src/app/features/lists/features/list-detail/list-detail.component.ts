@@ -48,8 +48,6 @@ export class ListDetailComponent {
   getListDetail(listId: string) {
     this.listService.getlistById(listId).subscribe(res => {
       this.listDetail = res;
-      console.log(this.listDetail);
-      
       this.getDailyTasks(this.listDetail._id);
     })
   }
